@@ -169,8 +169,6 @@ cython_debug/
 # yaml files
 #*.yaml
 
-.DS_Store
-*.txt
 
 # visualization figure files
 *.jpg
