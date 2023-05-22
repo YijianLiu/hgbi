@@ -4,7 +4,7 @@ import torch as th
 from . import BaseDataset, register_dataset
 from dgl.data.utils import load_graphs
 from .multigraph import MultiGraphDataset
-from ..sampler.negative_sampler import Uniform_exclusive
+from sampler.negative_sampler import Uniform_exclusive
 from . import AcademicDataset
 
 

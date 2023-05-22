@@ -1,6 +1,7 @@
 import g_library
 
 ds_node = g_library.construct_dataset(name = 'acm4NSHE',task = 'node_classification')
+print()
 '''
 ds_node contains dataset details, e.g. in_dim, meta_paths, category, num_classes
 ds_node.g is Graph on DGL format

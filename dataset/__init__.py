@@ -10,7 +10,7 @@ from .alircd_dataset import *
 from .adapter import AsLinkPredictionDataset, AsNodeClassificationDataset
 from .mg2vec_dataset import Mg2vecDataSet
 from .meirec_dataset import MeiRECDataset, get_data_loader
-
+import numpy
 DATASET_REGISTRY = {}
 
 
@@ -112,7 +112,7 @@ from .NodeClassificationDataset import NodeClassificationDataset
 from .LinkPredictionDataset import LinkPredictionDataset
 from .RecommendationDataset import RecommendationDataset
 from .EdgeClassificationDataset import EdgeClassificationDataset
-from .HypergraphDataset import HGraphDataset
+#from .HypergraphDataset import HGraphDataset
 
 def build_dataset_v2(dataset, task):
     if dataset in CLASS_DATASETS:

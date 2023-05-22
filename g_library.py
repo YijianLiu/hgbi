@@ -1,10 +1,10 @@
-from openhgnn.dataset import build_dataset
-from openhgnn.dataset import AcademicDataset
-from openhgnn.dataset import Mg2vecDataSet
+from dataset import build_dataset
+from dataset import AcademicDataset
+from dataset import Mg2vecDataSet
 import dgl
 from dgl.data import DGLDataset
 from dgl import transforms as T
-from openhgnn.dataset import AsLinkPredictionDataset, AsNodeClassificationDataset
+from dataset import AsLinkPredictionDataset, AsNodeClassificationDataset
 
 def construct_dataset(name,task):
     if task == 'node_classification':

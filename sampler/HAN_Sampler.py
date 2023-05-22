@@ -1,6 +1,6 @@
 import dgl
 from dgl.sampling import RandomWalkNeighborSampler
-from ..utils import extract_metapaths
+from utils import extract_metapaths
 
 
 class HANSampler(dgl.dataloading.Sampler):

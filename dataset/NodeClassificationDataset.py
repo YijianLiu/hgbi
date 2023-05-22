@@ -10,7 +10,7 @@ from . import load_acm_raw
 from . import BaseDataset, register_dataset
 from . import AcademicDataset, HGBDataset, OHGBDataset
 from .utils import sparse_mx_to_torch_sparse_tensor
-from ..utils import add_reverse_edges
+from utils import add_reverse_edges
 
 
 @register_dataset('node_classification')

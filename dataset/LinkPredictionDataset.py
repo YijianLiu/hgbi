@@ -6,7 +6,7 @@ import torch as th
 from dgl.data.knowledge_graph import load_data
 from . import BaseDataset, register_dataset
 from . import AcademicDataset, HGBDataset, OHGBDataset
-from ..utils import add_reverse_edges
+from utils import add_reverse_edges
 
 __all__ = ['LinkPredictionDataset', 'HGB_LinkPrediction']
 
