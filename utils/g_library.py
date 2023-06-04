@@ -9,7 +9,7 @@ from dataset import AsLinkPredictionDataset, AsNodeClassificationDataset
 def construct_dataset(name,task):
     if task == 'node_classification':
         if name in [
-                    'acm4NSHE', 'acm4GTN', 'academic4HetGNN', 'acm_han_raw',
+                    'acm4NSHE', 'acm4GTN', 'academic4HetGNN', 'acm4HetGNN','acm_han_raw',
                     'acm4HeCo', 'dblp4MAGNN', 'imdb4MAGNN', 'imdb4GTN',
                     'acm4NARS', 'yelp4HeGAN',
                     'HGBn-ACM', 'HGBn-DBLP', 'HGBn-Freebase', 'HGBn-IMDB',
@@ -19,7 +19,11 @@ def construct_dataset(name,task):
                     'HNE-PubMed', #修复：应该在节点里，而不是链路预测
                     'ogbn-mag',#下载比较慢
                     'aifb', 'mutag', 'bgs', 'am',
+                    'alircd_small',
+                    'ICDM'
                     ]:
+            if name == "acm4HetGNN":
+                name = 'academic4HetGNN'
             return build_dataset(dataset=name, task=task, logger=None)
         
         elif name  == "academic4HetGNN":
@@ -41,7 +45,7 @@ def construct_dataset(name,task):
                     'HGBl-amazon', 'HGBl-LastFM', 'HGBl-PubMed',
                     'ohgbl-MTWM', 'ohgbl-yelp1', 'ohgbl-yelp2', 'ohgbl-Freebase']:   
             return build_dataset(dataset=name, task=task, logger=None)
-        elif name in ['DoubanMovie']: #修复，需要单独拿出来，原来hin_nodeclassification注册类里面没有
+        elif name in ['DoubanMovie']: #修复，需要单独拿出来，原来hin_link_prediction注册类里面没有
             ds = AcademicDataset('DoubanMovie')
             ds.g = ds[0]
             return ds
@@ -52,7 +56,7 @@ def construct_dataset(name,task):
             return build_dataset(dataset=name, task=task, logger=None)
 
 class MyDataset(DGLDataset):
-    def __init__(self,name,path,reverse=False):
+    def __init__(self,name,path,reverse=True):
         self.path = path
         self.reverse = reverse
         super().__init__(name=name)
@@ -60,7 +64,6 @@ class MyDataset(DGLDataset):
 
     def process(self):
         gs, _ = dgl.load_graphs(self.path)
-        gs[0]
         if(self.reverse):
             self._g = T.AddReverse()(gs[0])
         else:

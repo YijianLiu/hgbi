@@ -10,7 +10,7 @@ from .alircd_dataset import *
 from .adapter import AsLinkPredictionDataset, AsNodeClassificationDataset
 from .mg2vec_dataset import Mg2vecDataSet
 from .meirec_dataset import MeiRECDataset, get_data_loader
-import numpy
+
 DATASET_REGISTRY = {}
 
 
@@ -76,7 +76,7 @@ def build_dataset(dataset, task, *args, **kwargs):
                      'dblp4MAGNN', 'imdb4MAGNN', 'imdb4GTN', 'acm4NARS', 'demo_graph', 'yelp4HeGAN', 'DoubanMovie',
                      'Book-Crossing', 'amazon4SLICE', 'MTWM', 'HNE-PubMed', 'HGBl-ACM', 'HGBl-DBLP', 'HGBl-IMDB','amazon']:
         _dataset = 'hin_' + task
-    elif dataset in ohgbn_datasets + ohgbl_datasets:
+    elif dataset in ohgbn_datasets + ohgbn_datasets:
         _dataset = 'ohgb_' + task
     elif dataset in ['ogbn-mag']:
         _dataset = 'ogbn_' + task
@@ -116,10 +116,11 @@ from .EdgeClassificationDataset import EdgeClassificationDataset
 
 def build_dataset_v2(dataset, task):
     if dataset in CLASS_DATASETS:
-        path = ".".join(CLASS_DATASETS[dataset].split(".")[:-1])
-        module = importlib.import_module(path)
-        class_name = CLASS_DATASETS[dataset].split(".")[-1]
-        dataset_class = getattr(module, class_name)
+        # path = ".".join(CLASS_DATASETS[dataset].split(".")[:-1])
+        # module = importlib.import_module(path)
+        # class_name = CLASS_DATASETS[dataset].split(".")[-1]
+        #dataset_class = getattr(module, class_name) ToMerge
+        dataset_class = eval(CLASS_DATASETS[dataset])
         d = dataset_class()
         if task == 'node_classification':
             target_ntype = getattr(d, 'category')
@@ -132,16 +133,17 @@ def build_dataset_v2(dataset, task):
             res = AsLinkPredictionDataset(d, target_link=target_link, target_link_r=target_link_r)
         return res
 
-
+# ToMerge add prefix
 CLASS_DATASETS = {
-    "dblp4GTN": "openhgnn.dataset.DBLP4GTNDataset",
+    "dblp4GTN": "DBLP4GTNDataset",
     # "acm4GTN": "openhgnn.dataset.ACM4GTNDataset",
-    "imdb4GTN": "openhgnn.dataset.IMDB4GTNDataset",
-    "alircd_small": "openhgnn.dataset.AliRCDSmallDataset",
-    "alircd_session1": "openhgnn.dataset.AliRCDSession1Dataset",
-    "ohgbn-alircd_session1": "openhgnn.dataset.AliRCDSession1Dataset",
-    "alircd_session2": "openhgnn.dataset.AliRCDSession2Dataset",
-    "ohgbn-alircd_session2": "openhgnn.dataset.AliRCDSession2Dataset",
+    "imdb4GTN": "IMDB4GTNDataset",
+    "alircd_small": "AliRCDSmallDataset",
+    "alircd_session1": "AliRCDSession1Dataset",
+    "ICDM":"AliICDMDataset",
+    "ohgbn-alircd_session1": "AliRCDSession1Dataset",
+    "alircd_session2": "AliRCDSession2Dataset",
+    "ohgbn-alircd_session2": "AliRCDSession2Dataset",
 }
 
 __all__ = [

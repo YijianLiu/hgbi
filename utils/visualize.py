@@ -50,18 +50,18 @@ def plot_degree_dist(g, save_path=None, **kwargs):
         y_list.append(y)
 
     plt.figure(1)
-    plt.style.use('ggplot')
+    plt.style.use('seaborn')
     # prep axes
     plt.xlabel('Degree')
     plt.xscale('log')
     plt.xlim(1, max(xscales))
 
-    plt.ylabel('Number_of_Nodes')
+    plt.ylabel('Number')
     plt.yscale('log')
     plt.ylim(1, max(yscales))
     # do plot
     for i in range(len(ntypes)):
-        plt.scatter(x_list[i], y_list[i], marker='*')
+        plt.scatter(x_list[i], y_list[i])
     plt.legend(ntypes)
     if save_path is None:
         plt.show()
@@ -77,12 +77,17 @@ def plot_number_metapath(g, meta_paths_dict, save_path=None, **kwargs):
     for meta_path_name, meta_path in meta_paths_dict.items():
         meta_path_names.append(meta_path_name)
         for i, etype in enumerate(meta_path):
+            if(isinstance(etype,list)):
+                _new_type = (etype[0],etype[1],etype[2])
+                etype = _new_type
             if i == 0:
                 adj = g.adj(etype=etype)
             else:
                 adj = th.sparse.mm(adj, g.adj(etype=etype))
+        print(meta_path_name)
         meta_path_nums.append(int(th.sparse.sum(adj)))
-
+    print("meta_path_nums:")
+    print(meta_path_nums)
     plt.figure(1)
     plt.style.use('ggplot')
     # prep axes

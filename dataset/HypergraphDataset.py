@@ -157,7 +157,7 @@ def generate_embeddings(edge, nums_type):
     return embeddings
 
 
-@register_dataset("hypergraph_dataset")
-class HGraphDataset(BaseDataset):
-    def get_data(self, name, is_train):
-        return HgraphDataset(name, is_train)
+# @register_dataset("hypergraph_dataset")
+# class HGraphDataset(BaseDataset):
+#     def get_data(self, name, is_train):
+#         return HgraphDataset(name, is_train)

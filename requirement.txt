@@ -5,4 +5,5 @@ torch>=1.8.1
 optuna
 colorama
 openhgnn
-dgl >= 0.8
+dgl == 1.0.1
+matplotlib
