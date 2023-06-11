@@ -10,7 +10,7 @@ from dgl.data.utils import save_graphs
 class Mg2vecDataSet(DGLDataset):
     _prefix = 'https://s3.cn-north-1.amazonaws.com.cn/dgl-data/'
     _urls = {
-        'dblp4Mg2vec_4': 'dataset/openhgnn/dblp4mg2vec_4.zip',
+        'dblp4Mg2vec_4': 'dataset/openhgnn/dblp4Mg2vec_4.zip',
         'dblp4Mg2vec_5': 'dataset/openhgnn/dblp4mg2vec_5.zip',
     }
 

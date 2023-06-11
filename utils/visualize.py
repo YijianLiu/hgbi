@@ -1,7 +1,7 @@
 import numpy as np
 from collections import Counter
 import torch as th
-
+import pickle
 __all__ = ['plot_degree_dist', 'plot_portion', 'plot_number_metapath']
 
 
@@ -51,22 +51,30 @@ def plot_degree_dist(g, save_path=None, **kwargs):
 
     plt.figure(1)
     plt.style.use('seaborn')
+    #plt.style.use('ggplot')
     # prep axes
-    plt.xlabel('Degree')
+    plt.xlabel('Degree',fontsize=13)
     plt.xscale('log')
-    plt.xlim(1, max(xscales))
+    plt.xlim(1, 1000)
 
-    plt.ylabel('Number')
+    plt.ylabel('Number',fontsize=13)
     plt.yscale('log')
     plt.ylim(1, max(yscales))
     # do plot
+    #fig, ax = plt.subplots(figsize=(4,6))
+    #fig.set_size_inches(7, 8, forward=True)
     for i in range(len(ntypes)):
         plt.scatter(x_list[i], y_list[i])
+    plt.gca().set_aspect(0.9)
+    x_y = [x_list,y_list,xscales,yscales]
+    with open("./degree.pkl", 'wb') as f:
+        pickle.dump(x_y, f)
     plt.legend(ntypes)
+    #plt.set_xscale('linear')
     if save_path is None:
         plt.show()
     else:
-        plt.savefig(save_path)
+        plt.savefig(save_path,dpi=300)
 
 
 def plot_number_metapath(g, meta_paths_dict, save_path=None, **kwargs):

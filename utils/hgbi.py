@@ -20,7 +20,7 @@ def construct_dataset(name,task):
                     'ogbn-mag',#下载比较慢
                     'aifb', 'mutag', 'bgs', 'am',
                     'alircd_small',
-                    'ICDM'
+                    'ICDM',
                     ]:
             if name == "acm4HetGNN":
                 name = 'academic4HetGNN'
@@ -30,16 +30,13 @@ def construct_dataset(name,task):
             return AcademicDataset("academic4HetGNN")
         
         #修复：dblp4Mg2vec_4、dblp4Mg2vec_5大写需要改成 dblp4mg2vec_4 dblp4mg2vec_5
-        #没找到mg2vec这个算法，这个是链路预测的吧，没有node label
-        elif name in ['dblp4mg2vec_4', 'dblp4mg2vec_5']:
-            ds = Mg2vecDataSet(name=name)
-            ds.g = ds[0]
-            return ds
+        #无mg2vec这个算法，该数据集无node label
 
 
     elif task == 'link_prediction':
         #amazon4SLICE 使用了节点分类的代码，先去掉
-        if name in ['MTWM', 'HGBl-ACM',
+        if name in ['amazon4SLICE', #应该在链路预测，节点分类去掉
+                    'MTWM', 'HGBl-ACM',
                     'HGBl-DBLP', 'HGBl-IMDB',
                     'wn18', 'FB15k', 'FB15k-237',
                     'HGBl-amazon', 'HGBl-LastFM', 'HGBl-PubMed',
@@ -55,6 +52,11 @@ def construct_dataset(name,task):
         if name in ['LastFM4KGCN','yelp4rec']:
             return build_dataset(dataset=name, task=task, logger=None)
 
+    elif task == 'edge_classification':
+        if name in ['dblp4Mg2vec_4', 'dblp4Mg2vec_5']:
+            ds = Mg2vecDataSet(name=name)
+            ds.g = ds[0]
+            return ds
 class MyDataset(DGLDataset):
     def __init__(self,name,path,reverse=True):
         self.path = path
