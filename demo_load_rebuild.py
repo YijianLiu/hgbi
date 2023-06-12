@@ -2,16 +2,18 @@ import utils.hgbi as hgbi
 
 if __name__ == "__main__":
 
-    
-    ds_node = hgbi.construct_dataset(
-        name = 'ICDM',task = 'node_classification')
+    #Build Risk Product Detection Dataset
+    ds_node = hgbi.build_dataset(
+        name = 'RPDD',task = 'node_classification')
     '''
     ds_node contains dataset details:
     e.g. in_dim, meta_paths, category, num_classes
     ds_node.g is Graph on DGL format
     '''
-    ds_link =  hgbi.construct_dataset(
-        name = 'MTWM',task = 'link_prediction')
+
+    #Build Takeout Recommendation Dataset
+    ds_link =  hgbi.build_dataset(
+        name = 'TRD',task = 'link_prediction')
     '''
     ds_link contains dataset details:
     e.g. target_link, target_link_r, node_type,

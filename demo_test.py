@@ -1,11 +1,9 @@
 import utils.hgbi as hgbi
 
-if __name__ == "__main__":
+ds_node = hgbi.build_dataset(
+    name = 'acm4NSHE',task = 'node_classification')
+print(ds_node.g)
 
-    ds_node = hgbi.construct_dataset(
-        name = 'ohgbl-yelp2',task = 'link_prediction')
-    print(ds_node.g)
-
-    # ds_link =  g_library.construct_dataset(
-    #     name = 'amazon4SLICE',task = 'link_prediction')
-    print()
+ds_link = hgbi.build_dataset(
+    name = 'ohgbl-yelp2',task = 'link_prediction')
+print(ds_link.g)

@@ -66,9 +66,9 @@ def plot_degree_dist(g, save_path=None, **kwargs):
     for i in range(len(ntypes)):
         plt.scatter(x_list[i], y_list[i])
     plt.gca().set_aspect(0.9)
-    x_y = [x_list,y_list,xscales,yscales]
-    with open("./degree.pkl", 'wb') as f:
-        pickle.dump(x_y, f)
+    # x_y = [x_list,y_list,xscales,yscales]
+    # with open("./degree.pkl", 'wb') as f:
+    #     pickle.dump(x_y, f)
     plt.legend(ntypes)
     #plt.set_xscale('linear')
     if save_path is None:

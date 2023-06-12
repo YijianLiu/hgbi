@@ -1,4 +1,4 @@
-from dataset import build_dataset
+from dataset import build_dataset as build_
 from dataset import AcademicDataset
 from dataset import Mg2vecDataSet
 import dgl
@@ -6,7 +6,7 @@ from dgl.data import DGLDataset
 from dgl import transforms as T
 from dataset import AsLinkPredictionDataset, AsNodeClassificationDataset
 
-def construct_dataset(name,task):
+def build_dataset(name,task):
     if task == 'node_classification':
         if name in [
                     'acm4NSHE', 'acm4GTN', 'academic4HetGNN', 'acm4HetGNN','acm_han_raw',
@@ -20,11 +20,13 @@ def construct_dataset(name,task):
                     'ogbn-mag',#下载比较慢
                     'aifb', 'mutag', 'bgs', 'am',
                     'alircd_small',
-                    'ICDM',
+                    'ICDM','RPDD'
                     ]:
             if name == "acm4HetGNN":
                 name = 'academic4HetGNN'
-            return build_dataset(dataset=name, task=task, logger=None)
+            if name == "RPDD":
+                name = "ICDM"
+            return build_(dataset=name, task=task, logger=None)
         
         elif name  == "academic4HetGNN":
             return AcademicDataset("academic4HetGNN")
@@ -40,8 +42,10 @@ def construct_dataset(name,task):
                     'HGBl-DBLP', 'HGBl-IMDB',
                     'wn18', 'FB15k', 'FB15k-237',
                     'HGBl-amazon', 'HGBl-LastFM', 'HGBl-PubMed',
-                    'ohgbl-MTWM', 'ohgbl-yelp1', 'ohgbl-yelp2', 'ohgbl-Freebase']:   
-            return build_dataset(dataset=name, task=task, logger=None)
+                    'ohgbl-MTWM', 'ohgbl-yelp1', 'ohgbl-yelp2', 'ohgbl-Freebase','TRD']: 
+            if name == "TRD":
+                name = "MTWM"
+            return build_(dataset=name, task=task, logger=None)
         elif name in ['DoubanMovie']: #修复，需要单独拿出来，原来hin_link_prediction注册类里面没有
             ds = AcademicDataset('DoubanMovie')
             ds.g = ds[0]
@@ -50,7 +54,7 @@ def construct_dataset(name,task):
 
     elif task == 'recommendation':
         if name in ['LastFM4KGCN','yelp4rec']:
-            return build_dataset(dataset=name, task=task, logger=None)
+            return build_(dataset=name, task=task, logger=None)
 
     elif task == 'edge_classification':
         if name in ['dblp4Mg2vec_4', 'dblp4Mg2vec_5']:
