@@ -7,3 +7,4 @@ colorama
 openhgnn
 dgl == 1.0.1
 matplotlib
+rdflib

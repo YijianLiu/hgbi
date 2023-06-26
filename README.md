@@ -54,7 +54,7 @@ For more details, please refer to the "demo_*.py" files
 
 ## Summary of total available heterogeneous graph datasets
 ### Node classification
-| Dataset        | Ntype | Node       | Etype | Edge        | Avg Attri | Label | Model     | Paper             | Macro/Micro\_F1 |
+| Dataset        | Ntype | Node       | Etype | Edge        | Avg Attri | Label | Model     | Original (default: Macro/Micro-F1%)     | Reproduced (Macro/Micro_F1%) |
 | :------------- | :---- | :--------- | :---- | :---------- | :-------- | :---- | :-------- | :---------------- | :-------------- |
 | acm4NSHE       | 3     | 11,246     | 4     | 34,852      | 128       | 3     | NSHE      | 83\.27/84.12      | 84\.78/84.95    |
 | acm4HeCo       | 3     | 11,246     | 4     | 34,852      | 3,043     | 3     | HeCo      | 89\.04/88.71      | 88\.66/88.35    |
@@ -71,8 +71,12 @@ For more details, please refer to the "demo_*.py" files
 | ohgbn-yelp2    | 4     | 82,465     | 4     | 30,542,675  | N/A       | 16    | RGCN      | 5\.10/23.24       | 5\.04/40.44     |
 | ohgbn-acm      | 3     | 8,994      | 2     | 25,922      | 1,902     | 3     | fastGTN   | N/A               | 92\.92/92.85    |
 | ohgbn-imdb     | 3     | 12,772     | 4     | 37,288      | 1,256     | 3     | RGCN      | N/A               | 57\.57/63.66    |
-| dblp4GTN       | 3     | 18,405     | 4     | 67,946      | 334       | 4     | fastGTN   | 94\.18(F1 score)  | 90\.39/91.39    |
-| RPDD           | 7     | 13,806,619 | 7     | 157,814,864 | 256       | 2     | RGCN      | N/A               | 90\.46/98.02    |
+| dblp4GTN       | 3     | 18,405     | 4     | 67,946      | 334       | 4     | fastGTN   | 94\.18 (F1 score)  | 90\.39/91.39    |
+| aifb           | 7     | 7,262      | 104   | 48,810      | N/A       | 4     | RGCN      | 95\.83 (Accuracy) | 96\.92/97.22                   |
+| mutag          | 5     | 27,163     | 50    | 148,100     | N/A       | 2     | RGCN      | 73\.23 (Accuracy) | 66\.40/70.59                   |
+| bgs            | 27    | 94,806     | 122   | 672,884     | N/A       | 2     | RGCN      | 83\.10 (Accuracy) | 88\.26/89.66                   |
+| am             | 7     | 1,885,136  | 108   | 5,668,682   | N/A       | 11    | RGCN      | 89\.29 (Accuracy) | 89\.41/89.90                   |
+| RPDD           | 7     | 13,806,619 | 7     | 157,814,864 | 256       | 2     | RGCN      | N/A               | 90\.46/98.02                   |
 
 ### Link prediction
 | Dataset        | Ntype | Node       | Etype | Edge       | Avg Attri | Label | Model   | Paper  | AUC\_ROC    |
