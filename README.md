@@ -47,7 +47,7 @@ dataset = hgbi.build_dataset(
 
 plot_degree_dist(dataset.g,'./degree.png')
 draw_tsne(dataset,'./sne.png')
-meta_path_nums, connectivity_strength, homogeneity = number_meta_path(g, meta_paths_dict=dataset.meta_paths_dict, strength=2)
+meta_path_nums, heterophily, edge_radio  = number_meta_path(g, meta_paths_dict=dataset.meta_paths_dict, strength=2)
 
 ```
 For more details, please refer to the "demo_*.py" files
@@ -67,7 +67,7 @@ For more details, please refer to the "demo_*.py" files
 | yelp4HeGAN     | 5     | 3,913      | 8     | 77,360      | 64        | 3     | HeGAN     | 85\.24/80.31      | 71\.51/79.16    |
 | HGBn-ACM       | 4     | 10,942     | 8     | 547,872     | 1,902     | 3     | SimpleHGN | 93\.2/93.12       | 66\.64/88.4     |
 | HGBn-DBLP      | 4     | 26,128     | 6     | 239,566     | 1,538     | 4     | SimpleHGN | 93\.77/94.35      | 86\.31/87.24    |
-| ohgbn-Freebase | 8     | 12,164,758 | 36    | 62,982,566  | N/A       | 8     | RGCN      | 6\.89/38.02       | 53\.07/69.33    |
+| ohgbn-Freebase | 8     | 12,164,758 | 36    | 62,982,566  | N/A       | 8     | RGCN      | N/A       | 53\.07/69.33    |
 | ohgbn-yelp2    | 4     | 82,465     | 4     | 30,542,675  | N/A       | 16    | RGCN      | 5\.10/23.24       | 5\.04/40.44     |
 | ohgbn-acm      | 3     | 8,994      | 2     | 25,922      | 1,902     | 3     | fastGTN   | N/A               | 92\.92/92.85    |
 | ohgbn-imdb     | 3     | 12,772     | 4     | 37,288      | 1,256     | 3     | RGCN      | N/A               | 57\.57/63.66    |
@@ -82,11 +82,11 @@ For more details, please refer to the "demo_*.py" files
 | HGBl-DBLP      | 4     | 26,128     | 6     | 239,566    | 1,538     | 1     | HDE     | N/A    | 98\.36      |
 | HGBl-IMDB      | 4     | 21,420     | 6     | 86,642     | 3,390     | 1     | HDE     | N/A    | 91\.51      |
 | HGBl-amazon    | 1     | 10,099     | 2     | 148,659    | 1,156     | 2     | GATNE-T | N/A    | 80\.83(avg) |
-| HGBl-LastFM    | 3     | 20,612     | 6     | 283,042    | N/A       | 1     | RGCN    | 57\.17 | 76\.46      |
-| HGBl-PubMed    | 4     | 63,109     | 20    | 489,972    | 200       | 1     | RGCN    | 78\.38 | 89\.3       |
+| HGBl-LastFM    | 3     | 20,612     | 6     | 283,042    | N/A       | 1     | RGCN    | 81\.9 | 76\.46      |
+| HGBl-PubMed    | 4     | 63,109     | 20    | 489,972    | 200       | 1     | RGCN    | 88\.32 | 89\.3       |
 | ohgbl-yelp1    | 4     | 2,353,365  | 4     | 10,417,742 | N/A       | 1     | CompGCN | N/A    | 61\.21      |
 | ohgbl-yelp2    | 4     | 82,465     | 4     | 31,206,253 | N/A       | 1     | RGCN    | N/A    | 65\.6       |
-| ohgbl-Freebase | 8     | 12,364,755 | 36    | 63,906,230 | N/A       | 1     | RGCN    | 50\.18 | 58\.75      |
+| ohgbl-Freebase | 8     | 12,164,755 | 36    | 63,906,230 | N/A       | 1     | RGCN    | 50\.18 | 58\.75      |
 | DoubanMovie    | 6     | 37,595     | 12    | 3,429,852  | N/A       | 1     | RGCN    | N/A    | 91\.55      |
 | TRD            | 3     | 408,849    | 4     | 18,931,400 | N/A       | 1     | RGCN    | N/A    | 92\.69      |
 

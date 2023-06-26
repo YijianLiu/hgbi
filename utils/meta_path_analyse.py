@@ -8,18 +8,21 @@ def number_meta_path(g, meta_paths_dict, strength=1):
     meta_path_nums = []
     connectivity_strength = []
     homogeneity = []
+    heterophily = []
     src_label = g.srcdata['label']
     dst_label = g.dstdata['label']
 
     #convert etype  [src,edge,dst] -> (src,edge,dst)
+    etype_is_list = False
     new_meta_paths_dict = {}
     for meta_path_name, meta_path in meta_paths_dict.items():
         new_meta_paths_dict[meta_path_name] = []
         for i, etype in enumerate(meta_path):
             if(isinstance(etype,list)):
+                etype_is_list = True
                 _new_type = (etype[0],etype[1],etype[2])
                 new_meta_paths_dict[meta_path_name].append(_new_type)
-    if len(new_meta_paths_dict.keys())>0:
+    if  etype_is_list:
         meta_paths_dict = new_meta_paths_dict
     for meta_path_name, meta_path in meta_paths_dict.items():
         meta_path_names.append(meta_path_name)
@@ -41,7 +44,7 @@ def number_meta_path(g, meta_paths_dict, strength=1):
                 conn += 1
                 row.append(int(adj.indices()[0][i]))
                 col.append(int(adj.indices()[1][i]))
-        connectivity_strength.append(conn/length)
+        connectivity_strength.append(1-conn/length)
 
         # 计算同构性
         length = len(row)
@@ -52,16 +55,18 @@ def number_meta_path(g, meta_paths_dict, strength=1):
             if slabel[row[i]] == dlabel[col[i]]:
                 ans += 1
         homogeneity.append(ans/conn)
+        heterophily.append(1-ans/conn)
+
 
     i = 0
     for meta_path_name in meta_paths_dict.keys():
         print(meta_path_name,":")
         print("edges:",meta_path_nums[i])
-        print("homogeneity:",homogeneity[i])
+        print("heterophily :",heterophily)
         print("edge/total:",connectivity_strength[i])
         print()
         i += 1
-    return meta_path_nums, connectivity_strength, homogeneity
+    return meta_path_nums, heterophily, connectivity_strength
 
 
 if __name__ == "__main__":
